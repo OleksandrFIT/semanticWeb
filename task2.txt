@@ -1,0 +1,13 @@
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?universityName
+WHERE {
+  ?university a dbpedia-owl:University ;
+              rdfs:label ?universityName ;
+              dbpedia-owl:country <http://dbpedia.org/resource/Ukraine> ;
+              dbpedia-owl:foundingDate ?foundingDate .
+  FILTER (LANGMATCHES(LANG(?universityName), "uk") && ?foundingDate > 0)
+}
+ORDER BY ASC(?foundingDate)
+LIMIT 1
